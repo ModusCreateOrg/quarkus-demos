@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello-service-alb
+  annotations:
+    kubernetes.io/ingress.class: alb
+    kubernetes.io/cluster/demo-cluster: shared
+  labels:
+    app: hello-service-alb
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: hello-service
+              servicePort: 8080
