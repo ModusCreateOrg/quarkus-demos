@@ -1,12 +1,13 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: hello-service-alb
+  name: hello-ingress
+  namespace: quarkus-hello-demo
   annotations:
     kubernetes.io/ingress.class: alb
-    kubernetes.io/cluster/demo-cluster: shared
+    alb.ingress.kubernetes.io/scheme: internet-facing
   labels:
-    app: hello-service-alb
+    app: hello-ingress
 spec:
   rules:
     - http:
