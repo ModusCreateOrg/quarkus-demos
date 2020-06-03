@@ -15,7 +15,7 @@ public class HelloResource {
         if (HelloHealthCheck.respondWithError) {
             return Response.serverError().build();
         } else {
-            return Response.ok("Hello from " +
+            return Response.ok("Good Morning from " +
                     System.getenv().getOrDefault("HOSTNAME", "unknown")).build();
         }
     }

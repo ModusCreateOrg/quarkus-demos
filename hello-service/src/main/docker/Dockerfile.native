@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/hello-service .
+# docker build -f src/main/docker/Dockerfile.native -t moduscreate/quarkus-hello-service:v1 .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/hello-service
+# docker run -i --rm -p 8080:8080 moduscreate/quarkus-hello-service:v1
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1

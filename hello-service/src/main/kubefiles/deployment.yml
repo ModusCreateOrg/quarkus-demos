@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: hello-app
-          image: wesleyfuchter/hello-service
+          image: moduscreate/quarkus-hello-service:v1
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -25,13 +25,7 @@ spec:
             httpGet:
               port: 8080
               path: /health/live
-            initialDelaySeconds: 1
-            periodSeconds: 3
-            timeoutSeconds: 2
           readinessProbe:
             httpGet:
               path: /health/ready
               port: 8080
-            initialDelaySeconds: 1
-            periodSeconds: 3
-            timeoutSeconds: 2
