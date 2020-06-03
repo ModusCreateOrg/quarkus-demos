@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app
+  namespace: quarkus-hello-demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-app
+      namespace: quarkus-hello-demo
+  template:
+    metadata:
+      labels:
+        app: hello-app
+        namespace: quarkus-hello-demo
+    spec:
+      containers:
+        - name: hello-app
+          image: moduscreate/quarkus-hello-service:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /health/live
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8080
