@@ -36,7 +36,9 @@ export default amazing;
 
 ## Prerequisites
 
-{Explain the prerequisites}
+* Java 8 or higher installed and the bin folder defined on the PATH.
+* Maven 3.6 or higher installed and the bin folder defined on the PATH.
+* GraalVM CE 20 or higher installed and the bin folder defined on the PATH. (required only for native build)
 
 ## Testing
 
