@@ -16,7 +16,7 @@ spec:
         namespace: quarkus-cqrs-demo
     spec:
       containers:
-        - name: transaction-app
+        - name: balance-app
           image: moduscreate/quarkus-balance-service:v1
           imagePullPolicy: Always
           ports:
@@ -24,8 +24,8 @@ spec:
           livenessProbe:
             httpGet:
               port: 8080
-              path: /health/live
+              path: /balance-service/health/live
           readinessProbe:
             httpGet:
-              path: /health/ready
+              path: /balance-service/health/ready
               port: 8080
