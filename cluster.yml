@@ -8,4 +8,6 @@ metadata:
 nodeGroups:
   - name: worker-nodes
     instanceType: t3.small
-    desiredCapacity: 3
+    desiredCapacity: 1
+    minSize: 0
+    maxSize: 3

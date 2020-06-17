@@ -7,9 +7,9 @@ export default function() {
   const url = 'http://localhost:8080/transactions';
 
   const params = {
-	headers: {
-	  'Content-Type': 'application/json',
-	},
+    headers: {
+      'Content-Type': 'application/json',
+    },
   };
 
   const res = http.post(url, JSON.stringify(expensePayload), params);
