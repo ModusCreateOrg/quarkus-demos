@@ -7,7 +7,7 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t moduscreate/quarkus-balance-service .
+# docker build -f src/main/docker/Dockerfile.native -t moduscreate/quarkus-balance-service:v1 .
 #
 # Then run the container using:
 #
