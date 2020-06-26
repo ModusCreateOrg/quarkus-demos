@@ -4,3 +4,4 @@ metadata:
   name: quarkus-hello-demo
   labels:
     name: quarkus-hello-demo
+    istio-injection: disabled

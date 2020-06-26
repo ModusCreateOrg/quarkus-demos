@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: quarkus-hello
+  namespace: quarkus-hello-demo
+spec:
+  ports:
+    - port: 8080
+      name: http
+  selector:
+    app: quarkus-hello
+    namespace: quarkus-hello-demo
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quarkus-hello-v1
+  namespace: quarkus-hello-demo
+  labels:
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: quarkus-hello
+      namespace: quarkus-hello-demo
+  template:
+    metadata:
+      labels:
+        app: quarkus-hello
+        namespace: quarkus-hello-demo
+        version: v1
+    spec:
+      containers:
+        - name: quarkus-hello
+          image: moduscreate/quarkus-hello-service:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /hello-service/health/live
+          readinessProbe:
+            httpGet:
+              path: /hello-service/health/ready
+              port: 8080
+
+---
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: quarkus-hello-v2
+    namespace: quarkus-hello-demo
+    labels:
+      version: v2
+  spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        app: quarkus-hello
+        namespace: quarkus-hello-demo
+    template:
+      metadata:
+        labels:
+          app: quarkus-hello
+          namespace: quarkus-hello-demo
+          version: v2
+      spec:
+        containers:
+          - name: quarkus-hello
+            image: moduscreate/quarkus-hello-service:v2
+            imagePullPolicy: Always
+            ports:
+              - containerPort: 8080
+            livenessProbe:
+              httpGet:
+                port: 8080
+                path: /hello-service/health/live
+            readinessProbe:
+              httpGet:
+                path: /hello-service/health/ready
+                port: 8080
