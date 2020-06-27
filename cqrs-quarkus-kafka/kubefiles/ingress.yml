@@ -16,3 +16,7 @@ spec:
             backend:
               serviceName: transaction-service
               servicePort: 8080
+          - path: /balance-service/*
+            backend:
+              serviceName: balance-service
+              servicePort: 8080    
