@@ -4,7 +4,7 @@ import {check, sleep} from 'k6';
 const incomePayload = JSON.parse(open("../income-transaction.json"));
 
 export default function() {
-  const url = 'http://localhost:8080/transactions';
+  const url = 'http://bankaccount.ga/transaction-service/transactions';
 
   const params = {
     headers: {
