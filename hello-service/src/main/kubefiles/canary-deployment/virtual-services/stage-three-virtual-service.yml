@@ -18,11 +18,11 @@ spec:
         port:
           number: 8080
         subset: blue
-      weight: 100
+      weight: 50
     - destination:
         host: quarkus-hello
         port:
           number: 8080
         subset: green
-      weight: 0
+      weight: 50
     
