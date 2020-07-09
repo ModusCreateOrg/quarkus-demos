@@ -16,7 +16,7 @@ spec:
       labels:
         app: quarkus-hello
         namespace: quarkus-hello-demo
-        version: v2
+        version: green
     spec:
       containers:
         - name: quarkus-hello
