@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: istio-ingress
+  namespace: istio-system
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  rules:
+  - host: quarkus-hello-demo.tk
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: istio-ingressgateway
+          servicePort: 80

@@ -7,5 +7,7 @@ metadata:
 
 nodeGroups:
   - name: worker-nodes
-    instanceType: t2.small
-    desiredCapacity: 2
+    instanceType: t3.medium
+    desiredCapacity: 1
+    minSize: 0
+    maxSize: 2

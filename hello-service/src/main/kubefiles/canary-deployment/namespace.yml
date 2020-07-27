@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: quarkus-hello-demo
+  labels:
+    name: quarkus-hello-demo
+    istio-injection: enabled
