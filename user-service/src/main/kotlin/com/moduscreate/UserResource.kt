@@ -9,6 +9,7 @@ import javax.ws.rs.POST
 import javax.ws.rs.Path
 import javax.ws.rs.PathParam
 import javax.ws.rs.Produces
+import javax.ws.rs.QueryParam
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
@@ -30,5 +31,17 @@ class UserResource {
     @Produces(MediaType.APPLICATION_JSON)
     fun findById(@PathParam("id") id: String): Response =
             Response.ok(User.findById(id)).build()
+
+    @GET
+    @Path("/by-email/")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun findByEmail(@QueryParam("email") email: String): Response =
+            Response.ok(User.findByEmail(email)).build()
+
+    @GET
+    @Path("/by-status/")
+    @Produces(MediaType.APPLICATION_JSON)
+    fun findByStatus(@QueryParam("status") status: String): Response =
+            Response.ok(User.findByStatus(Status.valueOf(status))).build()
 
 }

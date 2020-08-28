@@ -20,6 +20,7 @@ class User: PanacheEntityBase {
 
     companion object: PanacheCompanion<User, String> {
         fun findByEmail(email: String) = find("email", email).firstResult()
+        fun findByStatus(status: Status) = find("status", status).list()
     }
 
     @Id
