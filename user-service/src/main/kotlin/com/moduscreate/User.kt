@@ -11,6 +11,8 @@ import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Table
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.PastOrPresent
 
 @Entity
 @Table(name = "\"User\"")
@@ -27,20 +29,24 @@ class User: PanacheEntityBase {
     lateinit var id: String
 
     @Column
+    @NotNull
     lateinit var email: String
 
     @Column
+    @NotNull
     lateinit var password: String
 
     @Column
     lateinit var name: String
 
     @Column(name = "birth_date")
+    @PastOrPresent
+    @NotNull
     lateinit var birthDate: LocalDate
 
     @Column
     @Enumerated(EnumType.STRING)
-    lateinit var status: Status
+    var status: Status = Status.ACTIVE
 
 }
 
