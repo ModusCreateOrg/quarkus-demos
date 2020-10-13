@@ -12,12 +12,14 @@ import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
+@SocialSecurity
 public class Person extends PanacheEntityBase {
 
     @Id
@@ -50,16 +52,35 @@ public class Person extends PanacheEntityBase {
     @Column(name = "register_date")
     public LocalDate registerDate;
 
-    @SocialSecurity
+    @Pattern(regexp = "^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$")
     @NotBlank
     @Column(name = "social_security")
     public String socialSecurity;
+
+    @NotNull
+    @Column(name = "issued_state")
+    public SocialSecurityIssuedState issuedState;
 
     @NotNull
     @Column
     @Enumerated(EnumType.STRING)
     public Status status = Status.ACTIVE;
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id='" + id + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                ", registerDate=" + registerDate +
+                ", socialSecurity='" + socialSecurity + '\'' +
+                ", issuedState=" + issuedState +
+                ", status=" + status +
+                '}';
+    }
 }
 
 enum Status {

@@ -4,6 +4,7 @@
   "lastName": "Johnson Jr.",
   "birthDate": "1959-08-14",
   "registerDate": "2020-10-14",
-  "socialSecurity": "00017-5753",
-  "status": "ACTIVE"
+  "socialSecurity": "018-49-1149",
+  "status": "ACTIVE",
+  "issuedState": "VIRGINIA"
 }

@@ -1,21 +1,18 @@
 package com.moduscreate;
 
-import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class SocialSecurityValidator implements ConstraintValidator<SocialSecurity, String> {
+import org.hibernate.validator.constraintvalidation.HibernateConstraintValidatorContext;
 
-    public static Pattern SOCIAL_SECURITY_NUM_PAT = Pattern.compile("^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$");
-
-    @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
-        return SOCIAL_SECURITY_NUM_PAT.matcher(value).matches();
-    }
+public class SocialSecurityValidator implements ConstraintValidator<SocialSecurity, Person> {
 
     @Override
-    public void initialize(SocialSecurity constraintAnnotation) {
-
+    public boolean isValid(Person value, ConstraintValidatorContext context) {
+        final var validatorContext = context.unwrap(HibernateConstraintValidatorContext.class);
+        validatorContext.addExpressionVariable("socialSecurity", value.socialSecurity);
+        validatorContext.addExpressionVariable("issuedState", value.issuedState);
+        return value.issuedState.checkPrefixOnRange(Integer.parseInt(value.socialSecurity.substring(0, 2)));
     }
 
 }

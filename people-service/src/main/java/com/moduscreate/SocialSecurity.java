@@ -14,7 +14,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = { SocialSecurityValidator.class })
 public @interface SocialSecurity {
 
-    String message() default "{value} is a invalid social security number";
+    String message() default "${socialSecurity} is an invalid social security number for ${issuedState}";
     Class[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 

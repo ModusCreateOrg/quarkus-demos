@@ -7,6 +7,6 @@ CREATE TABLE person (
     birth_date timestamp not null,
     register_date timestamp not null,
     social_security varchar not null,
-    status varchar not null default 'ACTIVE'
-
+    status varchar not null default 'ACTIVE',
+    issued_state varchar not null
 )
