@@ -29,7 +29,7 @@ public class Person extends PanacheEntityBase {
     public String id;
 
     @Email
-    @NotNull
+    @NotBlank
     @Column
     public String email;
 
@@ -45,13 +45,15 @@ public class Person extends PanacheEntityBase {
     public String lastName;
 
     @Past
+    @NotNull
     @Column(name = "birth_date")
     public LocalDate birthDate;
 
     @FutureOrPresent
+    @NotNull
     @Column(name = "register_date")
     public LocalDate registerDate;
-
+    
     @Pattern(regexp = "^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$")
     @NotBlank
     @Column(name = "social_security")

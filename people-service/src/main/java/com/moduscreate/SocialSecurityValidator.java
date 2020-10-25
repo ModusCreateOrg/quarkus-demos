@@ -14,5 +14,4 @@ public class SocialSecurityValidator implements ConstraintValidator<SocialSecuri
         validatorContext.addExpressionVariable("issuedState", value.issuedState);
         return value.issuedState.checkPrefixOnRange(Integer.parseInt(value.socialSecurity.substring(0, 2)));
     }
-
 }
