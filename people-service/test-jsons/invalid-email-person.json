@@ -1,0 +1,11 @@
+{
+  "email": "this is a invalid email",
+  "firstName": "Kobe",
+  "middleName": "Bean",
+  "lastName": "Bryant",
+  "birthDate": "1978-08-23",
+  "registerDate": "2020-11-07",
+  "socialSecurity": "253-80-1784",
+  "status": "INACTIVE",
+  "issuedState": "VIRGINIA"
+}
