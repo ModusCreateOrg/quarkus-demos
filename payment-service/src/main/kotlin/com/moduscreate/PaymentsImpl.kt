@@ -10,9 +10,25 @@ import javax.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class PaymentsImpl(private val client: PgPool) : Payments {
 
-    override fun save(payment: Payment): Uni<Payment> {
-        TODO("Not yet implemented")
-    }
+    override fun create(payment: Payment): Uni<Payment> =
+            client.preparedQuery("""
+                INSERT INTO payment (order_id, user_id, value) VALUES ($1, $2, $3) RETURNING id
+            """).execute(Tuple.of(payment.orderId, payment.userId, payment.value))
+                    .onItem().transform { payment.id(it.iterator().next().getUUID("id")) }
+
+    override fun update(id: String, payment: Payment): Uni<Payment> =
+            client.preparedQuery("""
+                UPDATE payment
+                   SET order_id = $1,
+                       user_id = $2, 
+                       value = $3
+                 WHERE id = $4  
+            """).execute(Tuple.of(payment.orderId, payment.userId, payment.value, id))
+                    .onItem().transform { payment }
+
+    override fun delete(id: String): Uni<Boolean> =
+            client.preparedQuery("DELETE FROM payment WHERE id = $1").execute(Tuple.of(id))
+                    .onItem().transform { it.rowCount() == 1 }
 
     override fun findOne(id: String): Uni<Payment> =
             client.preparedQuery("""
