@@ -4,6 +4,7 @@ import io.smallrye.mutiny.Multi
 import io.smallrye.mutiny.Uni
 import io.vertx.mutiny.pgclient.PgPool
 import io.vertx.mutiny.sqlclient.Tuple
+import java.util.*
 
 import javax.enterprise.context.ApplicationScoped
 
@@ -16,7 +17,7 @@ class PaymentsImpl(private val client: PgPool) : Payments {
             """).execute(Tuple.of(payment.orderId, payment.userId, payment.value))
                     .onItem().transform { payment.id(it.iterator().next().getUUID("id")) }
 
-    override fun update(id: String, payment: Payment): Uni<Payment> =
+    override fun update(id: UUID, payment: Payment): Uni<Payment> =
             client.preparedQuery("""
                 UPDATE payment
                    SET order_id = $1,
@@ -26,11 +27,11 @@ class PaymentsImpl(private val client: PgPool) : Payments {
             """).execute(Tuple.of(payment.orderId, payment.userId, payment.value, id))
                     .onItem().transform { payment }
 
-    override fun delete(id: String): Uni<Boolean> =
+    override fun delete(id: UUID): Uni<Boolean> =
             client.preparedQuery("DELETE FROM payment WHERE id = $1").execute(Tuple.of(id))
                     .onItem().transform { it.rowCount() == 1 }
 
-    override fun findOne(id: String): Uni<Payment> =
+    override fun findOne(id: UUID): Uni<Payment> =
             client.preparedQuery("""
                 SELECT id, order_id, user_id, value
                   FROM payment
