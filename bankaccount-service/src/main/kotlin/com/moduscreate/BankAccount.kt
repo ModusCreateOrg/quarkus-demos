@@ -14,7 +14,7 @@ data class BankAccount(
         val userId: String,
 
         @JsonProperty("active")
-        val active: Boolean
+        val active: Boolean = true
 ) {
 
     fun id(id: UUID) = copy(id = id)
