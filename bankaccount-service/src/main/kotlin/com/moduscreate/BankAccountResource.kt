@@ -11,24 +11,24 @@ import io.vertx.core.http.HttpMethod.POST
 import io.vertx.core.http.HttpMethod.PUT
 import java.util.*
 
-@RouteBase(path = "/payments")
-class PaymentResource(
-        private val payments: Payments
+@RouteBase(path = "/bank-accounts")
+class BankAccountResource(
+        private val bankAccounts: BankAccounts
 ) {
 
     @Route(path = "", methods = [GET], produces = ["application/json"])
-    fun findAll() = ReactiveRoutes.asJsonArray(payments.findAll())
+    fun findAll() = ReactiveRoutes.asJsonArray(bankAccounts.findAll())
 
     @Route(path = ":id", methods = [GET], produces = ["application/json"])
-    fun findOne(@Param id: String) = payments.findOne(UUID.fromString(id))
+    fun findOne(@Param id: String) = bankAccounts.findOne(UUID.fromString(id))
 
     @Route(path = "", methods = [POST], produces = ["application/json"], consumes = ["application/json"])
-    fun create(@Body payment: Payment) = payments.create(payment)
+    fun create(@Body bankAccount: BankAccount) = bankAccounts.create(bankAccount)
 
     @Route(path = ":id", methods = [PUT], produces = ["application/json"], consumes = ["application/json"])
-    fun update(@Param id: String, @Body payment: Payment) = payments.update(UUID.fromString(id), payment)
+    fun update(@Param id: String, @Body bankAccount: BankAccount) = bankAccounts.update(UUID.fromString(id), bankAccount)
 
     @Route(path = ":id", methods = [DELETE], produces = ["application/json"])
-    fun deleteOne(@Param id: String) = payments.delete(UUID.fromString(id))
+    fun deleteOne(@Param id: String) = bankAccounts.delete(UUID.fromString(id))
 
 }
