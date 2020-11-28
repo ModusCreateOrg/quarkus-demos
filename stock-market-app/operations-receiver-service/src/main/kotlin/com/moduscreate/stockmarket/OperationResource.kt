@@ -10,15 +10,13 @@ import org.eclipse.microprofile.reactive.messaging.Emitter
 
 @RouteBase(path = "/operations")
 class OperationResource(
-        private val operations: StockOperations,
-        @Channel("stocksOperations") private val emitter: Emitter<StockOperation>
+        @Channel("stockOperations") private val emitter: Emitter<StockOperation>
 ) {
 
     @Route(path = "/", methods = [HttpMethod.POST], produces = ["application/json"], consumes = ["application/json"])
-    fun execute(@Body stockOperation: StockOperation): Uni<StockOperation> {
+    fun execute(@Body stockOperation: StockOperation): StockOperation {
         emitter.send(stockOperation)
-        return operations.execute(stockOperation)
+        return stockOperation
     }
-
-
+    
 }
